@@ -11,4 +11,9 @@ public class RegisterController {
         return "login";
     }
 
+    @GetMapping("/")
+    public String showLandingPage() {
+        return "index";
+    }
+
 }
