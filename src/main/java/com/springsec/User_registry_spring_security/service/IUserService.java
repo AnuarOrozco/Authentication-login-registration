@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface IUserService extends UserDetailsService {
 
-    public User saveUser(UserRegistryDto userRegistryDto);
+    User saveUser(UserRegistryDto userRegistryDto);
     List<User> showAllUsers();
 }

@@ -22,14 +22,12 @@ public class RegisterController {
     }
 
     @GetMapping("/")
-    public String showLandingPage() {
-        return "index";
-    }
-
-    public String showAllUsers(Model model) {
+    public String showLandingPage(Model model) {
+        // Cargar todos los usuarios y agregar al modelo
         model.addAttribute("users", userService.showAllUsers());
         return "index";
     }
 }
+
 
 
