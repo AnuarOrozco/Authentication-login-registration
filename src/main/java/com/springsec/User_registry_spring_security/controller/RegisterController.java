@@ -1,10 +1,16 @@
 package com.springsec.User_registry_spring_security.controller;
 
+import com.springsec.User_registry_spring_security.service.UserServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class RegisterController {
+
+    @Autowired
+    private UserServiceImpl userService;
 
     @GetMapping("/login")
     public String showLoginForm() {
@@ -13,6 +19,11 @@ public class RegisterController {
 
     @GetMapping("/")
     public String showLandingPage() {
+        return "index";
+    }
+
+    public String showAllUsers(Model model) {
+        model.addAttribute("users", userService.showAllUsers());
         return "index";
     }
 
