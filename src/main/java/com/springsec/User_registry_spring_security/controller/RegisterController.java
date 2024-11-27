@@ -1,7 +1,8 @@
 package com.springsec.User_registry_spring_security.controller;
 
-import com.springsec.User_registry_spring_security.service.UserServiceImpl;
+import com.springsec.User_registry_spring_security.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,8 +10,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class RegisterController {
 
-    @Autowired
-    private UserServiceImpl userService;
+    private final IUserService userService;
+
+    public RegisterController(@Lazy IUserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping("/login")
     public String showLoginForm() {
@@ -26,5 +30,6 @@ public class RegisterController {
         model.addAttribute("users", userService.showAllUsers());
         return "index";
     }
-
 }
+
+

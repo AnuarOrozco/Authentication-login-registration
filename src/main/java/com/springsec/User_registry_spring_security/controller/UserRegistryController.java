@@ -1,6 +1,7 @@
 package com.springsec.User_registry_spring_security.controller;
 
 import com.springsec.User_registry_spring_security.dto.UserRegistryDto;
+import com.springsec.User_registry_spring_security.service.IUserService;
 import com.springsec.User_registry_spring_security.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,8 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/register")
 public class UserRegistryController {
 
-    @Autowired
-    private UserServiceImpl userService;
+    private final IUserService userService;
+
+    public UserRegistryController(IUserService userService) {
+        this.userService = userService;
+    }
 
     @ModelAttribute("user")
     public UserRegistryDto returnNewUserRegistryDto() {
@@ -31,5 +35,4 @@ public class UserRegistryController {
         userService.saveUser(userRegistryDto);
         return "redirect:/register?success";
     }
-
 }

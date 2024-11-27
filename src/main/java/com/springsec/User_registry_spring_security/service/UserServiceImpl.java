@@ -4,10 +4,11 @@ import com.springsec.User_registry_spring_security.dto.UserRegistryDto;
 import com.springsec.User_registry_spring_security.model.Role;
 import com.springsec.User_registry_spring_security.model.User;
 import com.springsec.User_registry_spring_security.repository.IUserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -18,13 +19,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class UserServiceImpl implements IUserService{
+public class UserServiceImpl implements IUserService, UserDetailsService {
 
-    @Autowired
-    private IUserRepository userRepository;
+    private final IUserRepository userRepository;
+    private final BCryptPasswordEncoder passwordEncoder;
 
-    @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
+    public UserServiceImpl(IUserRepository userRepository, @Lazy BCryptPasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @Override
     public User saveUser(UserRegistryDto userRegistryDto) {
@@ -59,5 +62,7 @@ public class UserServiceImpl implements IUserService{
     public List<User> showAllUsers() {
         return userRepository.findAll();
     }
-
 }
+
+
+
