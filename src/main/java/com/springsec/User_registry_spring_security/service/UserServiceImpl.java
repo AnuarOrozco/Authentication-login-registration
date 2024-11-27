@@ -9,6 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -22,13 +23,16 @@ public class UserServiceImpl implements IUserService{
     @Autowired
     private IUserRepository userRepository;
 
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+
     @Override
     public User saveUser(UserRegistryDto userRegistryDto) {
         User user = new User(
                 userRegistryDto.getName(),
                 userRegistryDto.getLastName(),
                 userRegistryDto.getEmail(),
-                userRegistryDto.getPassword(),
+                passwordEncoder.encode(userRegistryDto.getPassword()),
                 Arrays.asList(new Role("ROLE_USER")));
         return userRepository.save(user);
     }
