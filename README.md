@@ -47,7 +47,7 @@ Este proyecto es una demostración simple de un sistema de autenticación de usu
 ## Información del Proyecto
 
 - **Nombre del Proyecto:** Registro e Inicio de Sesión con Spring Boot y Spring Security
-- **Autor:** Anuar Avalos Orozco
+- **Integrantes:** Anuar Avalos Orozco, Gonzalo Magaña Hernandez, Pablo Mendoza Silva y Lucia Miranda De Paula Sanchez
 - **Materia:** Desarrollo de Aplicaciones Web
 - **Carrera:** Ingeniería de Software y Redes
 - **Universidad:** Universidad del Valle de México (UVM)
